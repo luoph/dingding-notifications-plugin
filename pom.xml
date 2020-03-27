@@ -82,7 +82,7 @@
     <dependency>
       <groupId>com.dingtalk.open</groupId>
       <artifactId>taobao-sdk-java-auto</artifactId>
-      <version>1.0</version>
+      <version>1479188381469-20200212</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>

@@ -75,10 +75,6 @@ public class BuildJobModel {
 
         + "- 状态："
         + this.statusType.getLabel()
-        + "![]"
-        + "("
-        + this.statusType.getIcon()
-        + ")"
         + "\n"
 
         + "- 持续时间："
