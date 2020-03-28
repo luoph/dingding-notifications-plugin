@@ -8,12 +8,13 @@ import io.jenkins.plugins.enums.BuildStatusEnum;
 import io.jenkins.plugins.enums.NoticeOccasionEnum;
 import io.jenkins.plugins.model.BuildJobModel;
 import io.jenkins.plugins.service.impl.DingTalkServiceImpl;
+import jenkins.model.Jenkins;
+
+import javax.annotation.Nonnull;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.annotation.Nonnull;
-import jenkins.model.Jenkins;
 
 /**
  * 监听 job 任务，使用钉钉机器人发送消息
@@ -45,16 +46,16 @@ public class DingTalkRunListener extends RunListener<Run<?, ?>> {
     UserIdCause cause = job.getLastBuild().getCause(Cause.UserIdCause.class);
 
     // 构建信息
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String jobName = run.getDisplayName();
     String jobUrl = rootPath + run.getUrl();
     String duration = run.getDurationString();
-//    String executorName = user.getDisplayName();
     String executorName = cause != null ? cause.getUserName() : user.getDisplayName();
     String executorPhone = user.getProperty(DingTalkUserProperty.class).getMobile();
     String datetime = formatter.format(run.getTimestamp().getTime());
     String changeLog = jobUrl + "/changes";
     String console = jobUrl + "/console";
+    String parameters = jobUrl + "/parameters";
 
     List<String> result = new ArrayList<>();
     DingTalkJobProperty property = job.getProperty(DingTalkJobProperty.class);
@@ -74,6 +75,7 @@ public class DingTalkRunListener extends RunListener<Run<?, ?>> {
           .atMobiles(atMobiles)
           .changeLog(changeLog)
           .console(console)
+          .parameters(parameters)
           .build();
       String msg = service.send(robotId, buildJobModel);
       if (msg != null) {

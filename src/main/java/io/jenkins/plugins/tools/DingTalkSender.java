@@ -48,6 +48,7 @@ public class DingTalkSender {
     List<Btns> btnList = new ArrayList<>();
     String changeLog = buildJobModel.getChangeLog();
     String console = buildJobModel.getConsole();
+    String parameters = buildJobModel.getParameters();
 
     if (!StringUtils.isEmpty(changeLog)) {
       Btns changeLogBtn = new Btns();
@@ -61,6 +62,13 @@ public class DingTalkSender {
       consoleBtn.setTitle("控制台");
       consoleBtn.setActionURL(console);
       btnList.add(consoleBtn);
+    }
+
+    if (!StringUtils.isEmpty(parameters)) {
+      Btns parametersBtn = new Btns();
+      parametersBtn.setTitle("构建参数");
+      parametersBtn.setActionURL(parameters);
+      btnList.add(parametersBtn);
     }
 
     OapiRobotSendRequest.Actioncard actionCard = new OapiRobotSendRequest.Actioncard();

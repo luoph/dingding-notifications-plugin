@@ -169,7 +169,7 @@ public class DingTalkRobotConfig implements Describable<DingTalkRobotConfig> {
           webhook,
           securityPolicyConfigs
       );
-      SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       DingTalkSender sender = new DingTalkSender(robotConfig);
       String rootUrl = Jenkins.get().getRootUrl();
       User user = User.current();

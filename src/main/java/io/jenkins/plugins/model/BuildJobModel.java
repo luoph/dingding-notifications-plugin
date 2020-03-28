@@ -37,6 +37,7 @@ public class BuildJobModel {
 
   private String console;
 
+  private String parameters;
 
   public At getAt() {
     At at = new At();
